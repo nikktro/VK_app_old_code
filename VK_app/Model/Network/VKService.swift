@@ -136,4 +136,38 @@ class VKService {
     }
   }
   
+  
+  
+  public func apiNewsfeed(completion: (([Newsfeed]?, Error?) -> Void)? = nil ) {
+    
+    let path = "/method/newsfeed.get"
+    
+    let params: Parameters = [
+      "access_token" : Session.shared.token,
+      "start_from" : 0,
+      "filters" : "post",
+      "count" : 5,
+      "max_photos" : 5,
+      "v": apiVersion
+    ]
+    
+    Alamofire.request(apiScheme + "://" + apiHost + path, method: .get, parameters: params).responseJSON { response in
+      
+      switch response.result {
+        
+      case .success(let value):
+        let json = JSON(value)
+        let newsfeed = json["response"]["items"].arrayValue.map { Newsfeed(json: $0) }
+        //newsfeed.forEach { print($0) }
+        completion?(newsfeed, nil)
+        
+      case .failure(let error):
+        print("Error: \(error.localizedDescription)")
+        completion?(nil, error)
+      }
+    }
+  }
+  
+
+  
 }
