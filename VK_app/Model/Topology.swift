@@ -22,6 +22,7 @@ import UIKit
 //}
 
 struct News {
+  let owner_id: Int
   let titleImage: UIImage?
   let titleName: String
   let titleTime: String
@@ -32,8 +33,10 @@ struct News {
   let commentCount: Int
   let shareCount: Int
   let viewCount: Int
+  let likeCount: Int
   
-  init(titleImage: UIImage?, titleName: String, titleTime: String, contentText: String, contentImage: UIImage?, commentCount: Int, shareCount: Int, viewCount: Int) {
+    init(owner_id: Int, titleImage: UIImage?, titleName: String, titleTime: String, contentText: String, contentImage: UIImage?, commentCount: Int, shareCount: Int, viewCount: Int, likeCount: Int) {
+    self.owner_id = owner_id
     self.titleImage = titleImage
     self.titleName = titleName
     self.titleTime = titleTime
@@ -42,6 +45,7 @@ struct News {
     self.commentCount = commentCount
     self.shareCount = shareCount
     self.viewCount = viewCount
+    self.likeCount = likeCount
   }
   
 }
